@@ -1,11 +1,11 @@
 class States:
     stateMap = {
-        0 : [1 , "right" , 3 , "buttom"],
-        1 : [0 , "left" , 2 , "right" , 4 , "buttom"],
-        2 : [1 , "left" , 5 , "buttom"],
-        3 : [0 , "up" , 4 , "right" , 6 , "buttom"],
-        4 : [1 , "up" , 3 , "left" , 5 , "right" , 7 , "buttom"],
-        5 : [2 , "up" , 4 , "left" , 8 , "buttom"],
+        0 : [1 , "right" , 3 , "down"],
+        1 : [0 , "left" , 2 , "right" , 4 , "down"],
+        2 : [1 , "left" , 5 , "down"],
+        3 : [0 , "up" , 4 , "right" , 6 , "down"],
+        4 : [1 , "up" , 3 , "left" , 5 , "right" , 7 , "down"],
+        5 : [2 , "up" , 4 , "left" , 8 , "down"],
         6 : [3 , "up" , 7 , "right"],
         7 : [4 , "up" , 6 , "left" , 8 , "right"],
         8 : [5 , "up" , 7 , "left"]
