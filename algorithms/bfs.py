@@ -39,7 +39,7 @@ class BFS:
         directions = []
         while goalState != self.initialState:
             direction = self.stateObj.get_direction(self.parent[goalState], goalState)
-            directions.insert(0, (direction , goalState))
+            directions.insert(0, (goalState, direction))
             goalState = self.parent[goalState]
 
         return directions
