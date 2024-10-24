@@ -4,7 +4,7 @@ import algorithms.bfs
 
 states_object = states.States()
 dfs = algorithms.dfs.DFS(867254301)
-status = dfs.perform_DFS()
+status = dfs.perform_iterative_DFS()
 print(status)
 path, cost, expanded, depth = dfs.get_results()
 print(path)

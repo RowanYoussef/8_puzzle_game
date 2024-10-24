@@ -9,16 +9,19 @@ class DFS:
         ## setting initial search state
         self.initial_state = state
         ## Other attributes to keep track of nodes expanded, path and depth
+        self.setup()
+    def setup(self):
         self.nodes_expanded = 0
         self.state_helper = states.States()
         self.family_map = {}
         self.max_level = 0
-    
+
     def perform_iterative_DFS(self):
         limit = 0
         val = self.perform_DFS(limit)
         while not val and limit <= 50:
             limit += 1
+            self.setup()
             val = self.perform_DFS(limit)
         return val
         
