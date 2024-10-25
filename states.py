@@ -73,7 +73,9 @@ class States:
         for i in range(len(state_str)):
             if state_str[i] == "0":
                 continue
-            cost += abs(i - int(state_str[i]))
+            x1, y1 = i % 3, i // 3
+            x2, y2 = int(state_str[i]) % 3, int(state_str[i]) // 3
+            cost += abs(x1 - x2) + abs(y1 - y2)
         return cost
     
     def calc_euclidean_cost(self, state):
