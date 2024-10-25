@@ -67,3 +67,32 @@ class States:
     
 
         
+    def calc_manhattan_cost(self, state):
+        state_str = self.get_string_state(state)
+        cost = 0
+        for i in range(len(state_str)):
+            if state_str[i] == "0":
+                continue
+            x1, y1 = i % 3, i // 3
+            x2, y2 = int(state_str[i]) % 3, int(state_str[i]) // 3
+            cost += abs(x1 - x2) + abs(y1 - y2)
+        return cost
+    
+    def calc_euclidean_cost(self, state):
+        state_str = self.get_string_state(state)
+        cost = 0
+        for i in range(len(state_str)):
+            if state_str[i] == "0":
+                continue
+            x1 = i % 3
+            y1 = i // 3
+            x2 = int(state_str[i]) % 3
+            y2 = int(state_str[i]) // 3
+            cost += ((x1 - x2)**2 + (y1 - y2)**2)**0.5
+        return cost
+    
+    def get_string_state(self, state):
+        state_str = str(state)
+        if len(state_str) == 8:
+            state_str = "0" + state_str
+        return state_str
