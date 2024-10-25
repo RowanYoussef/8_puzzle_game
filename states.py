@@ -1,4 +1,5 @@
 class States:
+    #state map to get the next valid move
     stateMap = {
         0 : [1 , 3 ],
         1 : [0 , 2 , 4],
@@ -10,6 +11,8 @@ class States:
         7 : [4 , 6  , 8],
         8 : [5 , 7]
     }
+
+    #direction map for mapping each move to its direction
     directionMap = {
         (0, 1): "right", (0, 3): "down", (1, 0): "left", 
         (1, 2): "right", (1, 4): "down", (2, 1): "left",
@@ -23,8 +26,10 @@ class States:
 
     def get_next_state(self , state):
         state_str = str(state)
+        #add 0 if the zero is at the begining
         if len(state_str) == 8:
             state_str = "0" + state_str
+        #get the index of 0 to know how yo move
         index = self.get_index_of_empty_slot(state_str)
         nextState = []
         for i in range(len(self.stateMap[index])):
@@ -32,6 +37,7 @@ class States:
             nextState.append(int(newString))
         return nextState
     
+    #function takes the previous state and current state to return the direction
     def get_direction(self ,state1 , state2):
         state1 = str(state1)
         state2 = str(state2)
@@ -51,7 +57,8 @@ class States:
         for i in range(len(state_str)):
             if state_str[i] == "0":
                 return i
-            
+
+    #check if the state is the goal state     
     def check_goal(self , state):
         if state == 12345678:
             return True

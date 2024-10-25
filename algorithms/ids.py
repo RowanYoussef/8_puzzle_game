@@ -36,6 +36,7 @@ class IDS(strategy.SearchStrategy):
         while len(frontier) > 0:
             ## pop state and update attributes
             curr_state, curr_level = frontier.pop()
+            in_frontier.remove(curr_state)
             explored[curr_state] = curr_level
             self.max_level = max(self.max_level, curr_level)
             self.nodes_expanded += 1
@@ -49,9 +50,10 @@ class IDS(strategy.SearchStrategy):
                 ## add other states to frontier
                 neighbours = self.state_helper.get_next_state(curr_state)
                 for n in neighbours:
-                    if explored[n] > curr_level+1 or explored[n] == -1:
+                    if (explored[n] > curr_level+1 or explored[n] == -1) and (n not in in_frontier):
                         self.family_map[n] = curr_state
                         frontier.append((n, curr_level+1))
+                        in_frontier.add(n)
         return False
     
     def get_results(self):

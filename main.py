@@ -42,18 +42,18 @@ ctx.set_strat('ids')
 #search = ctx.get_strat_obj(123450786)
 #search = ctx.get_strat_obj(136502478)
 #search = ctx.get_strat_obj(236158407)
-#search = ctx.get_strat_obj(876543210)
-search = ctx.get_strat_obj(102754863)
+search = ctx.get_strat_obj(876543210)
+#search = ctx.get_strat_obj(102754863)
 success = search.execute()
 if success:
     print("success")
-    #p, c, n, l = search.get_results()
-    #print(p)
-    #print("cost " + str(c))
-    #print("expanded "+str(n))
-    #print("depth " + str(l))
+    p, c, n, l = search.get_results()
+    print(p)
+    print("cost " + str(c))
+    print("expanded "+str(n))
+    print("depth " + str(l))
 else:
-    print("failed")
+    print("ids")
 
 
 
