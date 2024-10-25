@@ -1,31 +1,7 @@
-from algorithms.a_star import AStar
-import algorithms.dfs as dfs
-import states
-import algorithms.bfs as bfs
-import algorithms.ids as ids
-import algorithms.a_star as a_star
 
-class Context:
-    def __init__(self):
-        self.strat = 'dfs'
-    
-    def set_strat(self, strat):
-        self.strat = strat
-    
-    def get_strat_obj(self, state):
-        val = self.strat
-        if val == "dfs":
-            return dfs.DFS(state)
-        elif val == "bfs":
-            return bfs.BFS(state)
-        elif val == "ids":
-            return ids.IDS(state)
-        elif val == "a_star_e":
-            return a_star.AStar(state, "euclidean")
-        else:
-            return a_star.AStar(state, "manhattan")
-
-
+import customtkinter
+from context import Context
+from gui.mainframe import MainFrame
 # 120345678 -> 2
 # 123456078 -> 22
 # 874012356 -> 19
@@ -34,6 +10,23 @@ class Context:
 # 236158407 -> 23
 # 876543210 -> 28
 # 102754863 -> 23
+class App(customtkinter.CTk):
+    def __init__(self):
+        super().__init__()
+        self.geometry("800x900")
+        self.title("8 Puzzle Game")
+        self.grid_rowconfigure(0, weight=1)  # configure grid system
+        self.grid_columnconfigure(0, weight=1)
+
+        self.my_frame = MainFrame(master=self)
+        self.my_frame.grid(row=0, column=0, padx=20, pady=20, sticky="nsew")
+        # add widgets to app
+        
+
+
+app = App()
+app.mainloop()
+
 ctx = Context()
 ctx.set_strat('ids')
 #search = ctx.get_strat_obj(120345678)
@@ -42,18 +35,18 @@ ctx.set_strat('ids')
 #search = ctx.get_strat_obj(123450786)
 #search = ctx.get_strat_obj(136502478)
 #search = ctx.get_strat_obj(236158407)
-search = ctx.get_strat_obj(876543210)
-#search = ctx.get_strat_obj(102754863)
-success = search.execute()
-if success:
-    print("success")
-    p, c, n, l = search.get_results()
-    print(p)
-    print("cost " + str(c))
-    print("expanded "+str(n))
-    print("depth " + str(l))
-else:
-    print("ids")
+# search = ctx.get_strat_obj(876543210)
+# #search = ctx.get_strat_obj(102754863)
+# success = search.execute()
+# if success:
+#     print("success")
+#     p, c, n, l = search.get_results()
+#     print(p)
+#     print("cost " + str(c))
+#     print("expanded "+str(n))
+#     print("depth " + str(l))
+# else:
+#     print("ids")
 
 
 
