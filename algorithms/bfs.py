@@ -1,9 +1,10 @@
 from collections import defaultdict
 import queue
 import states
+import algorithms.search_strategy as strat
 
 
-class BFS:
+class BFS(strat.SearchStrategy):
     def __init__(self, initialState):
         self.initialState = initialState
         self.parent = {}
@@ -11,7 +12,7 @@ class BFS:
         self.stateObj = states.States()
         self.level = 0
 
-    def BFS(self):
+    def execute(self):
         frontier = queue.Queue()
         explored = defaultdict(lambda: False)
         frontier.put((0 ,self.initialState))
@@ -39,7 +40,7 @@ class BFS:
         directions = []
         while goalState != self.initialState:
             direction = self.stateObj.get_direction(self.parent[goalState], goalState)
-            directions.insert(0, (direction , goalState))
+            directions.insert(0, (goalState, direction))
             goalState = self.parent[goalState]
 
         return directions
@@ -51,7 +52,9 @@ class BFS:
         return self.level
             
 
-
+    def get_results(self):
+        path = self.get_path()
+        return path, len(path), len(self.get_nodes_expanded()), self.get_search_level()
 
 
 

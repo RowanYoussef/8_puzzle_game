@@ -1,33 +1,60 @@
 from algorithms.a_star import AStar
-import algorithms.dfs
+import algorithms.dfs as dfs
 import states
-import algorithms.bfs
+import algorithms.bfs as bfs
+import algorithms.ids as ids
+import algorithms.a_star as a_star
 
-# states_object = states.States()
-# dfs = algorithms.dfs.DFS(12345678)
-# status = dfs.perform_iterative_DFS()
-# print(status)
-# path, cost, expanded, depth = dfs.get_results()
-# print(path)
-# print("cost = "+str(cost))
-# print("expanded = "+str(expanded))
-# print("depth = "+str(depth))
-# print(states_object.check_goal(12345678))
-# print(states_object.get_direction(52431876,452031876))
-# print(states_object.get_next_state(52431876))
+class Context:
+    def __init__(self):
+        self.strat = 'dfs'
+    
+    def set_strat(self, strat):
+        self.strat = strat
+    
+    def get_strat_obj(self, state):
+        val = self.strat
+        if val == "dfs":
+            return dfs.DFS(state)
+        elif val == "bfs":
+            return bfs.BFS(state)
+        elif val == "ids":
+            return ids.IDS(state)
+        elif val == "a_star_e":
+            return a_star.AStar(state, "euclidean")
+        else:
+            return a_star.AStar(state, "manhattan")
 
-# bfs = algorithms.bfs.BFS(321645780)
-# print(bfs.BFS())
-# print(bfs.get_path())
-# print(bfs.get_nodes_expanded())
-# print(len(bfs.get_nodes_expanded()))
-# print(bfs.get_search_level())
-astar = AStar(312645780, "manhattan")
-print(astar.A_star())
-print(astar.get_path())
-print(astar.get_nodes_expanded())
-print(len(astar.get_nodes_expanded()))
-print(astar.get_search_level())
+
+# 120345678 -> 2
+# 123456078 -> 22
+# 874012356 -> 19
+# 123450786 -> 21
+# 136502478 -> 22
+# 236158407 -> 23
+# 876543210 -> 28
+# 102754863 -> 23
+ctx = Context()
+ctx.set_strat('ids')
+#search = ctx.get_strat_obj(120345678)
+#search = ctx.get_strat_obj(123456078)
+#search = ctx.get_strat_obj(874012356)
+#search = ctx.get_strat_obj(123450786)
+#search = ctx.get_strat_obj(136502478)
+#search = ctx.get_strat_obj(236158407)
+#search = ctx.get_strat_obj(876543210)
+search = ctx.get_strat_obj(102754863)
+success = search.execute()
+if success:
+    print("success")
+    #p, c, n, l = search.get_results()
+    #print(p)
+    #print("cost " + str(c))
+    #print("expanded "+str(n))
+    #print("depth " + str(l))
+else:
+    print("failed")
+
 
 
 

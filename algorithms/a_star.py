@@ -1,8 +1,8 @@
 import heapq
 from algorithms.heuristic_factory import HeuristicFactory
 import states
-
-class AStar:
+import algorithms.search_strategy as strat
+class AStar(strat.SearchStrategy):
     def __init__(self, initialState, heuristic_name):
         self.initialState = initialState
         self.heuristic_fn = HeuristicFactory.create_heuristic(heuristic_name)
@@ -12,7 +12,7 @@ class AStar:
         self.level = 0
         self.cost = {} # state, cost  -> g(n) 
 
-    def A_star(self):
+    def execute(self):
         frontier = []
         explored = set()
         
@@ -45,7 +45,7 @@ class AStar:
         
         while goalState != self.initialState:
             direction = self.stateObj.get_direction(self.parents[goalState], goalState)
-            directions.append((direction, goalState))
+            directions.append((goalState, direction))
             goalState = self.parents[goalState]
 
         directions.reverse()
@@ -57,4 +57,6 @@ class AStar:
     def get_search_level(self):
         return self.level
 
-
+    def get_results(self):
+        path = self.get_path()
+        return path, len(path), len(self.get_nodes_expanded()), self.get_search_level()
