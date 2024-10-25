@@ -42,10 +42,22 @@ print(f"Number of solvable states: {len(solvable_states)} (should be {factorial(
 
 for state in solvable_states:
     state = int(state)
-    ans1 = bfs.BFS(state).get_search_level()
-    ans2 = a_star.AStar(state, "manhattan").get_search_level()
-    ans3 = a_star.AStar(state, "euclidean").get_search_level()
-    # ans4 = 
+    bfs_instance = bfs.BFS(state)
+    bfs_instance.BFS()
+    ans1 = bfs_instance.get_search_level()
+    
+    astar_instance = a_star.AStar(state, "manhattan")
+    astar_instance.A_star()
+    ans2 = astar_instance.get_search_level()
+    
+    a_star_instance2 = a_star.AStar(state, "euclidean")
+    a_star_instance2.A_star()
+    ans3 = a_star_instance2.get_search_level()
+    
+       
+    
     
     assert ans1 == ans2 == ans3 # == ans4
+    print("Test passed!")
 print("All tests passed!")
+
