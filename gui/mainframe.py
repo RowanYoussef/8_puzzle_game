@@ -68,7 +68,7 @@ class MainFrame(ctk.CTkFrame):
        
         #reset results
         self.results.time_label.configure(text=f"Time: 0.0 ms")
-        self.status_label.configure(text="Loading")
+        self.status_label.configure(text="Loading" , text_color="green")
         self.string_label.configure(text="Direction")
         self.results.cost_label.configure(text=f"Cost: 0")
         self.results.depth_label.configure(text=f"Depth: 0")
@@ -78,32 +78,34 @@ class MainFrame(ctk.CTkFrame):
         self.initial_state = self.input_text.sample_input.get()
         
         # Perform the long-running task
-        self.board.update_grid(self.initial_state)
-        algorithm = self.search_method.search_method_dropdown.get()
-        self.ctx.set_strat(algorithm)
-        
-        start_time = datetime.now()
-        search = self.ctx.get_strat_obj(int(self.initial_state))   
-        
-        # Execute the search algorithm
-        success = search.execute()
-        
-        end_time = datetime.now()
-        time_difference = end_time - start_time
-        milliseconds = time_difference.total_seconds() * 1000
-        self.time = milliseconds
+        valid = self.board.update_grid(self.initial_state)
+        if valid:
+            algorithm = self.search_method.search_method_dropdown.get()
+            self.ctx.set_strat(algorithm)
+            
+            start_time = datetime.now()
+            search = self.ctx.get_strat_obj(int(self.initial_state))   
+            
+            # Execute the search algorithm
+            success = search.execute()
+            
+            end_time = datetime.now()
+            time_difference = end_time - start_time
+            milliseconds = time_difference.total_seconds() * 1000
+            self.time = milliseconds
 
-        # Update labels with results
-        self.status_label.configure(text="Finished")
-        self.results.time_label.configure(text=f"Time: {self.time:.2f} ms")
-        if success:
-            print("success")
-            self.path, self.cost, self.expanded, self.depth = search.get_results()
-            self.results.cost_label.configure(text=f"Cost: {self.cost}")
-            self.results.depth_label.configure(text=f"Depth: {self.depth}")
-            self.results.expanded_label.configure(text=f"Expanded Nodes: {self.expanded}")
+            # Update labels with results
+            self.status_label.configure(text="Finished" , text_color="green")
+            self.results.time_label.configure(text=f"Time: {self.time:.2f} ms")
+            if success:
+                self.path, self.cost, self.expanded, self.depth = search.get_results()
+                self.results.cost_label.configure(text=f"Cost: {self.cost}")
+                self.results.depth_label.configure(text=f"Depth: {self.depth}")
+                self.results.expanded_label.configure(text=f"Expanded Nodes: {self.expanded}")
+            else:
+                self.status_label.configure(text="Can't be solved", text_color="red")
         else:
-            self.status_label.configure(text="Can't be solved")
+            self.status_label.configure(text="invalid state" , text_color="red")
 
     # Get next state in grid
     def get_next_state(self):

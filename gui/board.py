@@ -29,17 +29,28 @@ class Board(ctk.CTkFrame):
         # Pad with leading zero if necessary to make it 9 digits
         if len(sample_value) == 8:
             sample_value = "0" + sample_value
-        
+
+        # Check for valid length and digits
         if len(sample_value) == 9 and sample_value.isdigit():
-            # Store the sample value as the initial state
-            self.strings = [sample_value]
-            self.current_index = 0
-            self.update_grid_display(sample_value)  # Display in grid
+            # Check for duplicates
+            if len(set(sample_value)) < 9:  
+                print("Invalid input: Duplicate digits found.")
+                for row in self.grid_cells:
+                    for cell in row:
+                        cell.configure(text="", fg_color="white") 
+                return False
+            else:
+                self.strings = [sample_value]
+                self.current_index = 0
+                self.update_grid_display(sample_value)  
+                return True
         else:
             for row in self.grid_cells:
                 for cell in row:
-                    cell.configure(text="", fg_color="white")  # Reset to default
+                    cell.configure(text="", fg_color="white") 
             print("Invalid input: Please enter exactly 9 digits.")
+            return False
+
 
     def update_grid_display(self, state):
         frame_color = self.grid_frame.cget("fg_color")
