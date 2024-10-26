@@ -66,6 +66,7 @@ class MainFrame(ctk.CTkFrame):
         self.index = -1
         self.time = 0
        
+        #reset results
         self.results.time_label.configure(text=f"Time: 0.0 ms")
         self.status_label.configure(text="Loading")
         self.string_label.configure(text="Direction")
@@ -75,6 +76,7 @@ class MainFrame(ctk.CTkFrame):
         
          # Update state
         self.initial_state = self.input_text.sample_input.get()
+        
         # Perform the long-running task
         self.board.update_grid(self.initial_state)
         algorithm = self.search_method.search_method_dropdown.get()

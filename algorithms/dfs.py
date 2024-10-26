@@ -4,7 +4,6 @@ import states
 
 class DFS(strategy.SearchStrategy):
     def __init__(self, state):
-        print("init")
         ## setting initial search state
         self.initial_state = state
         ## Other attributes to keep track of nodes expanded, path and depth
@@ -33,7 +32,6 @@ class DFS(strategy.SearchStrategy):
             explored.add(curr_state)
             self.max_level = max(self.max_level, curr_level)
             self.nodes_expanded += 1
-            print(str(curr_state) + " " + str(curr_level))
             ## checks of gaol was reached
             if self.state_helper.check_goal(curr_state):
                 return True

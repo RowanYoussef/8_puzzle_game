@@ -4,7 +4,6 @@ import states
 
 class IDS(strategy.SearchStrategy):
     def __init__(self, state):
-        print("init")
         ## setting initial search state
         self.initial_state = state
         ## Other attributes to keep track of nodes expanded, path and depth
@@ -40,7 +39,6 @@ class IDS(strategy.SearchStrategy):
             explored[curr_state] = curr_level
             self.max_level = max(self.max_level, curr_level)
             self.nodes_expanded += 1
-            print(str(curr_state) + " " + str(curr_level))
             ## checks of gaol was reached
             if self.state_helper.check_goal(curr_state):
                 return True
@@ -62,7 +60,6 @@ class IDS(strategy.SearchStrategy):
         head_state = 12345678
         cost = 0
         while head_state != self.initial_state:
-            print(head_state)
             cost += 1
             direction = self.state_helper.get_direction(self.family_map[head_state], head_state)
             path.append((head_state, direction))
