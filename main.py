@@ -1,4 +1,5 @@
 
+
 import customtkinter
 from gui.mainframe import MainFrame
 
@@ -18,8 +19,4 @@ class App(customtkinter.CTk):
 
 app = App()
 app.mainloop()
-
-
-
-
 
