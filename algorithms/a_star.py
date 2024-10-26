@@ -26,7 +26,7 @@ class AStar(strat.SearchStrategy):
 
             if self.stateObj.check_goal(state):
                 self.level = g_val
-                return "success"
+                return True
 
             nextStates = self.stateObj.get_next_state(state)
             for next_state in nextStates:
@@ -37,7 +37,7 @@ class AStar(strat.SearchStrategy):
                     heapq.heappush(frontier, (new_f, new_g, next_state))
                     self.parents[next_state] = state
 
-        return "failed"
+        return False
 
     def get_path(self):
         goalState = 12345678

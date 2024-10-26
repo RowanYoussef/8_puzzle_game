@@ -65,7 +65,7 @@ class IDS(strategy.SearchStrategy):
             print(head_state)
             cost += 1
             direction = self.state_helper.get_direction(self.family_map[head_state], head_state)
-            head_state = self.family_map[head_state]
             path.append((head_state, direction))
+            head_state = self.family_map[head_state]
 
         return path[::-1], cost, self.nodes_expanded, self.max_level

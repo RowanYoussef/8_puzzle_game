@@ -30,7 +30,7 @@ class BFS(strat.SearchStrategy):
             #check if the goal is reached
             if self.stateObj.check_goal(state[1]):
                 self.level = state[0]
-                return "success"
+                return True
             
             #get neighbours state of the current state
             nextStates = self.stateObj.get_next_state(state[1])
@@ -42,7 +42,7 @@ class BFS(strat.SearchStrategy):
                     frontier.put((state[0] + 1 , next_state))
                     in_frontier.add(next_state)
 
-        return "failed"
+        return False
 
     #function to get the path from the parent list
     def get_path(self):
@@ -52,6 +52,7 @@ class BFS(strat.SearchStrategy):
             direction = self.stateObj.get_direction(self.parent[goalState], goalState)
             directions.insert(0, (goalState, direction))
             goalState = self.parent[goalState]
+            
 
         return directions
 
