@@ -102,6 +102,7 @@ class MainFrame(ctk.CTkFrame):
                 self.results.cost_label.configure(text=f"Cost: {self.cost}")
                 self.results.depth_label.configure(text=f"Depth: {self.depth}")
                 self.results.expanded_label.configure(text=f"Expanded Nodes: {self.expanded}")
+                print(self.path)
             else:
                 self.status_label.configure(text="Can't be solved", text_color="red")
         else:
